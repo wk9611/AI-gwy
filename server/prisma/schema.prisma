@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Question {
+  id             Int      @id @default(autoincrement())
+  category       String   // 政治理论/常识判断/言语理解/数量关系/判断推理/资料分析
+  year           Int?
+  source         String?
+  content        String
+  optionA        String
+  optionB        String
+  optionC        String
+  optionD        String
+  answer         String   // A/B/C/D
+  explanation    String
+  knowledgePoint String?
+  difficulty     Int      @default(3)
+  createdAt      DateTime @default(now())
+}
+
+model ExamRecord {
+  id           Int      @id @default(autoincrement())
+  score        Int
+  totalCount   Int
+  correctCount Int
+  duration     Int
+  answers      String   // JSON string
+  createdAt    DateTime @default(now())
+}
+
+model WrongRecord {
+  id         Int      @id @default(autoincrement())
+  questionId Int
+  userAnswer String
+  count      Int      @default(1)
+  mastered   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

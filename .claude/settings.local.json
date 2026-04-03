@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npm create:*)",
+      "Bash(node prisma/seed.js)",
+      "Bash(node src/app.js)",
+      "Bash(curl -s http://localhost:3000/api/questions/categories)",
+      "Bash(kill %1)",
+      "Bash(npx vite:*)",
+      "Bash(curl -s -o /dev/null -w \"前端状态码: %{http_code}\" http://localhost:5173/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "Bash(node -e ':*)",
+      "Bash(netstat -ano)",
+      "Read(//d/项目/AI项目/AI-gwy/server/**)"
+    ]
+  }
+}
