@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '../src/db.js';
 
 const seedData = [
   // ====== 政治理论 ======

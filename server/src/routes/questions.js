@@ -1,8 +1,7 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../db.js';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // 获取所有分类及题目数量统计
 router.get('/categories', async (req, res) => {

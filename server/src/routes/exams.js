@@ -1,8 +1,7 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../db.js';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // 组卷：按比例从各题型抽题
 router.post('/generate', async (req, res) => {

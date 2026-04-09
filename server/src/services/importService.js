@@ -1,7 +1,5 @@
 import XLSX from 'xlsx';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '../db.js';
 
 const VALID_CATEGORIES = ['政治理论', '常识判断', '言语理解', '数量关系', '判断推理', '资料分析'];
 

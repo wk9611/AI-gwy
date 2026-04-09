@@ -1,8 +1,7 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../db.js';
 
 const router = Router();
-const prisma = new PrismaClient();
 
 // 获取错题列表（支持按分类筛选）
 router.get('/', async (req, res) => {

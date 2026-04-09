@@ -13,7 +13,9 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
       "Bash(node -e ':*)",
       "Bash(netstat -ano)",
-      "Read(//d/项目/AI项目/AI-gwy/server/**)"
+      "Read(//d/项目/AI项目/AI-gwy/server/**)",
+      "Bash(git config:*)",
+      "Bash(git push:*)"
     ]
   }
 }
