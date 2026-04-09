@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "installCommand": "cd server && npm install && npx prisma generate && cd ../client && npm install",
+  "installCommand": "cd server && npm install --omit=optional && npx prisma generate && cd ../client && npm install",
   "buildCommand": "cd client && npm run build",
   "outputDirectory": "client/dist",
   "rewrites": [
@@ -9,9 +9,7 @@
   ],
   "functions": {
     "api/index.js": {
-      "memory": 1024,
-      "maxDuration": 60,
-      "includeFiles": "server/**"
+      "maxDuration": 60
     }
   }
 }

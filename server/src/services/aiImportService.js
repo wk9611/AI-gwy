@@ -38,23 +38,31 @@ export async function extractTextFromFile(filePath, originalName) {
   const ext = path.extname(originalName).toLowerCase();
 
   if (ext === '.pdf') {
-    const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs');
-    const buffer = fs.readFileSync(filePath);
-    const uint8 = new Uint8Array(buffer);
-    const doc = await pdfjsLib.getDocument({ data: uint8 }).promise;
-    const pages = [];
-    for (let i = 1; i <= doc.numPages; i++) {
-      const page = await doc.getPage(i);
-      const content = await page.getTextContent();
-      pages.push(content.items.map((item) => item.str).join(' '));
+    try {
+      const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs');
+      const buffer = fs.readFileSync(filePath);
+      const uint8 = new Uint8Array(buffer);
+      const doc = await pdfjsLib.getDocument({ data: uint8 }).promise;
+      const pages = [];
+      for (let i = 1; i <= doc.numPages; i++) {
+        const page = await doc.getPage(i);
+        const content = await page.getTextContent();
+        pages.push(content.items.map((item) => item.str).join(' '));
+      }
+      return pages.join('\n');
+    } catch {
+      throw new Error('PDF解析库未安装，云端部署暂不支持PDF上传，请使用TXT格式或本地部署');
     }
-    return pages.join('\n');
   }
 
   if (ext === '.docx' || ext === '.doc') {
-    const mammoth = await import('mammoth');
-    const result = await mammoth.extractRawText({ path: filePath });
-    return result.value;
+    try {
+      const mammoth = await import('mammoth');
+      const result = await mammoth.extractRawText({ path: filePath });
+      return result.value;
+    } catch {
+      throw new Error('Word解析库未安装，云端部署暂不支持Word上传，请使用TXT格式或本地部署');
+    }
   }
 
   if (ext === '.txt') {
