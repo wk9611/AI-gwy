@@ -1,0 +1,5 @@
+{
+  "build_command": "cd client && npm install && npm run build && cd ../server && npm install && npx prisma generate",
+  "start_command": "cd server && node src/app.js",
+  "node_version": "18"
+}
