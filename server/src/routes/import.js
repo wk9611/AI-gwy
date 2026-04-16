@@ -5,7 +5,8 @@ import { importFromFile } from '../services/importService.js';
 import { extractTextFromFile, aiParseQuestions, importAiParsedQuestions } from '../services/aiImportService.js';
 
 const router = Router();
-const upload = multer({ dest: 'uploads/' });
+const uploadDir = process.env.VERCEL ? '/tmp' : 'uploads/';
+const upload = multer({ dest: uploadDir });
 
 // 上传 Excel/CSV 文件导入题目
 router.post('/upload', upload.single('file'), async (req, res) => {
