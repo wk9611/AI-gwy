@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import fs from 'fs';
 import multer from 'multer';
 import XLSX from 'xlsx';
 import { importFromFile } from '../services/importService.js';
@@ -6,6 +7,7 @@ import { extractTextFromFile, aiParseQuestions, importAiParsedQuestions } from '
 
 const router = Router();
 const uploadDir = process.env.VERCEL ? '/tmp' : 'uploads/';
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 const upload = multer({ dest: uploadDir });
 
 // 上传 Excel/CSV 文件导入题目
