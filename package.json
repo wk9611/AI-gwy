@@ -2,6 +2,7 @@
   "name": "ai-gwy",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "公务员行测在线学习系统",
   "scripts": {
     "dev:server": "cd server && npm run dev",
