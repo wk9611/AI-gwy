@@ -42,7 +42,7 @@ function startPractice(category) {
 <template>
   <div class="home">
     <div class="hero-section">
-      <h2>公务员行测在线学习系统</h2>
+      <h2>clark的gwy学习系统</h2>
       <p class="subtitle">涵盖行测六大模块，专项训练 · 模拟考试 · 错题巩固</p>
     </div>
 

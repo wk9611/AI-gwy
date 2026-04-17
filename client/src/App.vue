@@ -21,7 +21,7 @@ const adminItems = [
     <el-header class="app-header">
       <div class="header-left" @click="router.push('/')">
         <el-icon :size="28"><Reading /></el-icon>
-        <h1>公务员行测在线学习系统</h1>
+        <h1>clark的gwy学习系统</h1>
       </div>
       <el-menu mode="horizontal" :ellipsis="false" class="header-menu" router>
         <el-menu-item v-for="item in menuItems" :key="item.path" :index="item.path">
