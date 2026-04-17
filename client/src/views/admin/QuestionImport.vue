@@ -217,10 +217,17 @@ function resetAi() {
 
         <!-- 预览阶段 -->
         <div v-else-if="aiStage === 'preview'">
+          <el-alert
+            :title="`AI 成功识别出 ${aiQuestions.length} 道题目`"
+            description="请核实以下题目信息，确认无误后点击「确认导入」按钮完成导入。"
+            type="success"
+            show-icon
+            :closable="false"
+            style="margin-bottom:16px"
+          />
           <div class="preview-header">
             <div>
-              <el-tag type="success" size="large">AI 识别出 {{ aiQuestions.length }} 道题目</el-tag>
-              <span style="color:#909399;font-size:13px;margin-left:12px">
+              <span style="color:#909399;font-size:13px">
                 {{ selectedRows.length > 0 ? `已选 ${selectedRows.length} 题` : '默认全部导入，也可勾选部分导入' }}
               </span>
             </div>

@@ -76,6 +76,7 @@ app.get('/questions/:id', async (c) => {
 app.post('/questions', async (c) => {
   const prisma = getPrisma(c.env);
   const body = await c.req.json();
+  if (!body.source) body.source = '手动添加';
   const question = await prisma.question.create({ data: body });
   return c.json(question, 201);
 });

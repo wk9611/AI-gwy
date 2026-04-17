@@ -164,6 +164,15 @@ function resetSearch() {
       <el-table-column prop="content" label="题目内容" show-overflow-tooltip min-width="300" />
       <el-table-column prop="answer" label="答案" width="60" />
       <el-table-column prop="year" label="年份" width="70" />
+      <el-table-column prop="source" label="来源" width="110">
+        <template #default="{ row }">
+          <el-tag v-if="row.source === 'AI识别导入'" type="success" size="small">AI识别</el-tag>
+          <el-tag v-else-if="row.source === 'Excel导入'" type="warning" size="small">Excel导入</el-tag>
+          <el-tag v-else-if="row.source === '手动添加'" size="small">手动添加</el-tag>
+          <el-tag v-else-if="row.source" type="info" size="small">{{ row.source }}</el-tag>
+          <span v-else style="color:#c0c4cc;font-size:12px">-</span>
+        </template>
+      </el-table-column>
       <el-table-column prop="difficulty" label="难度" width="70" />
       <el-table-column label="操作" width="140" fixed="right">
         <template #default="{ row }">

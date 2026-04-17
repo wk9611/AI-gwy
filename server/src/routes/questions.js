@@ -64,7 +64,9 @@ router.get('/:id', async (req, res) => {
 
 // 创建题目
 router.post('/', async (req, res) => {
-  const question = await prisma.question.create({ data: req.body });
+  const data = { ...req.body };
+  if (!data.source) data.source = '手动添加';
+  const question = await prisma.question.create({ data });
   res.status(201).json(question);
 });
 

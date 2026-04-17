@@ -46,7 +46,7 @@ export async function importFromFile(filePath, originalName) {
       data: {
         category: String(category),
         year: year ? parseInt(year) : null,
-        source: source ? String(source) : null,
+        source: source ? String(source) : 'Excel导入',
         content: String(content),
         optionA: String(optA),
         optionB: String(optB),
