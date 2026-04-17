@@ -50,8 +50,8 @@ export async function extractTextFromFile(filePath, originalName) {
         pages.push(content.items.map((item) => item.str).join(' '));
       }
       return pages.join('\n');
-    } catch {
-      throw new Error('PDF解析失败，请确认文件格式正确或改用TXT格式');
+    } catch (e) {
+      throw new Error(`PDF解析失败: ${e.message}`);
     }
   }
 
