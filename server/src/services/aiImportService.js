@@ -39,12 +39,19 @@ export async function extractTextFromFile(filePath, originalName) {
 
   if (ext === '.pdf') {
     try {
-      const pdfParse = (await import('pdf-parse')).default;
+      const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs');
       const buffer = fs.readFileSync(filePath);
-      const data = await pdfParse(buffer);
-      return data.text;
+      const uint8 = new Uint8Array(buffer);
+      const doc = await pdfjsLib.getDocument({ data: uint8 }).promise;
+      const pages = [];
+      for (let i = 1; i <= doc.numPages; i++) {
+        const page = await doc.getPage(i);
+        const content = await page.getTextContent();
+        pages.push(content.items.map((item) => item.str).join(' '));
+      }
+      return pages.join('\n');
     } catch {
-      throw new Error('PDF解析库未安装，云端部署暂不支持PDF上传，请使用TXT格式或本地部署');
+      throw new Error('PDF解析失败，请确认文件格式正确或改用TXT格式');
     }
   }
 
