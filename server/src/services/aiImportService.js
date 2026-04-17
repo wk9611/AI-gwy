@@ -121,8 +121,13 @@ export async function aiParseQuestions(text) {
     throw new Error('未配置 DASHSCOPE_API_KEY 环境变量，请先设置通义千问 API Key');
   }
 
+  // 云端部署限制函数执行时间，截断过长文本
+  const isServerless = !!process.env.VERCEL;
+  const maxTextLen = isServerless ? 8000 : 50000;
+  const trimmedText = text.length > maxTextLen ? text.substring(0, maxTextLen) : text;
+
   // 根据文本长度选择模型
-  const model = text.length > 15000 ? 'qwen-long' : 'qwen-plus';
+  const model = trimmedText.length > 15000 ? 'qwen-long' : 'qwen-plus';
 
   const response = await axios.post(
     'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
@@ -130,17 +135,17 @@ export async function aiParseQuestions(text) {
       model,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: `请从以下文本中提取行测题目：\n\n${text}` },
+        { role: 'user', content: `请从以下文本中提取行测题目：\n\n${trimmedText}` },
       ],
       temperature: 0.1,
-      max_tokens: 16000,
+      max_tokens: 8000,
     },
     {
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      timeout: 300000, // 5分钟超时
+      timeout: isServerless ? 55000 : 300000,
     }
   );
 
